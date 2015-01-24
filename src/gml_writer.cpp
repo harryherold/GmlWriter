@@ -27,7 +27,17 @@ GmlWriter::~GmlWriter()
 	}
 }
 
-void GmlWriter::writeEdge(uint64_t id_src, uint64_t id_dest)
+const char * GmlWriter::getShapeText(Shape s)
+{
+	switch(s)
+	{
+		case Shape::Rectangle: return "rectangle";
+		case Shape::Roundrectangle: return "roundrectangle";
+		case Shape::Ellipse: return "ellipse";
+		case Shape::Triangle: return "triangle";
+	}
+	return nullptr;
+}
 
 void GmlWriter::writeNodeBegin()
 {

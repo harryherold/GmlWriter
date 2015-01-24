@@ -13,6 +13,22 @@
 namespace gw
 {
 
+enum class Shape: uint64_t
+{
+	Rectangle,
+	Roundrectangle,
+	Ellipse,
+	Triangle
+};
+
+const char * getShapeText(Shape s);
+
+struct Coordinate
+{
+	uint64_t x;
+	uint64_t y;
+};
+
 class GmlWriter
 {
 
@@ -20,6 +36,16 @@ public:
 	GmlWriter(const char *, bool, bool, const std::string &);
 
 	template<typename T>
+	void writeNode(uint64_t id, T label, Shape shape)
+	{
+		writeNodeBegin();
+		fileOut_ << "id " << id << '\n';
+		writeGraphicsBegin();
+		fileOut_ << "type " << '"' << getShapeText(shape) << '"' << "\n";
+		writeEnd();
+		writeLabel<T>(label);
+		writeEnd();
+	}
 
 	template<typename T>
 	void writeNode(uint64_t id, T label)
@@ -59,6 +85,8 @@ private:
 	void writeEnd();
 
 	void writeGraphicsBegin();
+
+	const char * getShapeText(Shape s);
 
 	template<typename T>
 	void writeLabel(T l)

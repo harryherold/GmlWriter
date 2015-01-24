@@ -16,14 +16,14 @@ int main()
 
 	g.writeNode<const char *>(1,"foo");
 	g.writeNode<double>(2,3.14);
-	g.writeNode<std::string>(3,"bar");
+	g.writeNode<std::string>(3,"bar",Shape::Ellipse);
 	g.writeNode<int>(4,4);
 
 	g.writeEdge(1,2);
 	g.writeEdge(1,3);
 
-	g.writeEdge(2,4);
-	g.writeEdge(3,4);
+	g.writeEdge<double>(2,4,1.2);
+	g.writeEdge<const char *>(3,4,"baz");
 
 	std::cout << "Finished" << '\n';
 	return 0;
