@@ -1,2 +1,2 @@
 # GmlWriter
-Writes GML(graph-markup-language) files.
+Writes GML(Graph Modelling Language) files.
