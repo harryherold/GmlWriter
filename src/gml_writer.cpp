@@ -28,11 +28,32 @@ GmlWriter::~GmlWriter()
 }
 
 void GmlWriter::writeEdge(uint64_t id_src, uint64_t id_dest)
+
+void GmlWriter::writeNodeBegin()
+{
+	fileOut_ << "node\n";
+	fileOut_ << "[\n";
+}
+
+void GmlWriter::writeEdgeBegin()
 {
 	fileOut_ << "edge\n";
 	fileOut_ << "[\n";
-	fileOut_ << "source " << id_src << '\n';
-	fileOut_ << "target " << id_dest << '\n';
-	fileOut_ << "]\n";
 }
 
+void GmlWriter::writeEdgeDirection(uint64_t s, uint64_t d)
+{
+	fileOut_ << "source " << s << '\n';
+	fileOut_ << "target " << d << '\n';
+}
+
+void GmlWriter::writeGraphicsBegin()
+{
+	fileOut_ << "graphics\n";
+	fileOut_ << "[\n";
+}
+
+void GmlWriter::writeEnd()
+{
+	fileOut_ << "]\n";
+}
