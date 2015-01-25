@@ -13,6 +13,13 @@
 namespace gw
 {
 
+enum class EdgeStyle: uint64_t
+{
+	Default,
+	Dotted,
+	DashedDotted,
+};
+
 enum class Shape: uint64_t
 {
 	Rectangle,
@@ -85,6 +92,7 @@ private:
 	void writeGraphicsBegin();
 
 	const char * getShapeText(Shape);
+	const char * getEdgeStyleText(EdgeStyle);
 
 	template<typename First,typename...Rest>
 	void writeNodeAttribute(const First& first, Rest&... rest)

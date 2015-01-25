@@ -29,14 +29,32 @@ GmlWriter::~GmlWriter()
 
 const char * GmlWriter::getShapeText(Shape s)
 {
-	switch(s)
+	switch (s)
 	{
-		case Shape::Rectangle: return "rectangle";
-		case Shape::Roundrectangle: return "roundrectangle";
-		case Shape::Ellipse: return "ellipse";
-		case Shape::Triangle: return "triangle";
+	case Shape::Rectangle:
+		return "rectangle";
+	case Shape::Roundrectangle:
+		return "roundrectangle";
+	case Shape::Ellipse:
+		return "ellipse";
+	case Shape::Triangle:
+		return "triangle";
 	}
 	return nullptr;
+}
+
+const char * GmlWriter::getEdgeStyleText(EdgeStyle es)
+{
+	switch (es)
+	{
+		case EdgeStyle::Dotted:
+			return "dotted";
+		case EdgeStyle::DashedDotted:
+			return "dashed_dotted";
+		case EdgeStyle::Default:
+			return "";
+	}
+	return "";
 }
 
 void GmlWriter::writeNodeBegin()
