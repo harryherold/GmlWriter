@@ -67,3 +67,35 @@ void GmlWriter::writeEnd()
 {
 	fileOut_ << "]\n";
 }
+
+void GmlWriter::writeLabel(const char * l)
+{
+	fileOut_ << "label " << '"' << l << '"' << "\n";
+}
+
+void GmlWriter::writeId(uint64_t id)
+{
+	fileOut_ << "id " << id << '\n';
+}
+
+void GmlWriter::writeNodeAttribute(Shape & s)
+{
+	fileOut_ << "type " << '"' << getShapeText(s) << '"' << "\n";
+}
+
+void GmlWriter::writeNodeAttribute(Geometry & c)
+{
+	fileOut_ << "x " << c.x << "\n";
+	fileOut_ << "y " << c.y << "\n";
+	fileOut_ << "w " << c.w << "\n";
+	fileOut_ << "h " << c.h << "\n";
+}
+
+void GmlWriter::writeNode(uint64_t id, const char * label)
+{
+	writeNodeBegin();
+	writeId(id);
+	writeLabel(label);
+	writeEnd();
+}
+

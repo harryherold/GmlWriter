@@ -35,26 +35,20 @@ class GmlWriter
 public:
 	GmlWriter(const char *, bool, bool, const std::string &);
 
-	template<typename T>
-	void writeNode(uint64_t id, T label, Shape shape)
+	void writeNode(uint64_t id, const char * label);
+
+	template<typename...Rest>
+	void writeNode(uint64_t id, const char * label, Rest&... rest)
 	{
 		writeNodeBegin();
-		fileOut_ << "id " << id << '\n';
+		writeId(id);
+		writeLabel(label);
 		writeGraphicsBegin();
-		fileOut_ << "type " << '"' << getShapeText(shape) << '"' << "\n";
+		writeNodeAttribute(rest...);
 		writeEnd();
-		writeLabel<T>(label);
 		writeEnd();
 	}
 
-	template<typename T>
-	void writeNode(uint64_t id, T label)
-	{
-		writeNodeBegin();
-		fileOut_ << "id " << id << '\n';
-		writeLabel<T>(label);
-		writeEnd();
-	}
 
 	template<typename T>
 	void writeEdge(uint64_t id_src, uint64_t id_dest, T label)
@@ -82,14 +76,22 @@ private:
 	void writeNodeBegin();
 	void writeEdgeBegin();
 	void writeEdgeDirection(uint64_t, uint64_t);
+	void writeLabel(const char * l);
+	void writeId(uint64_t id);
+	void writeNodeAttribute(Shape & s);
+	void writeNodeAttribute(Geometry & c);
 	void writeEnd();
 
 	void writeGraphicsBegin();
 
-	const char * getShapeText(Shape s);
+	const char * getShapeText(Shape);
 
-	template<typename T>
-	void writeLabel(T l)
+	template<typename First,typename...Rest>
+	void writeNodeAttribute(const First& first, Rest&... rest)
+	{
+		writeNodeAttribute(first);
+		writeNodeAttribute(rest...);
+	}
 	{
 		fileOut_ << "label " << '"' << l << '"' << "\n";
 	}
