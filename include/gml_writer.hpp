@@ -21,12 +21,12 @@ enum class Shape: uint64_t
 	Triangle
 };
 
-const char * getShapeText(Shape s);
-
-struct Coordinate
+struct Geometry
 {
-	uint64_t x;
-	uint64_t y;
+	double x;
+	double y;
+	double w;
+	double h;
 };
 
 class GmlWriter
