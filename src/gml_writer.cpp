@@ -117,3 +117,27 @@ void GmlWriter::writeNode(uint64_t id, const char * label)
 	writeEnd();
 }
 
+void GmlWriter::writeEdge(uint64_t id_src, uint64_t id_dest)
+{
+	writeEdgeBegin();
+	writeEdgeDirection(id_src, id_dest);
+	writeEnd();
+}
+
+void GmlWriter::writeEdge(uint64_t id_src, uint64_t id_dest, const char * label)
+{
+	writeEdgeBegin();
+	writeEdgeDirection(id_src, id_dest);
+	writeLabel(label);
+	writeEnd();
+}
+
+void GmlWriter::writeEdgeAttribute(EdgeStyle & es)
+{
+	fileOut_ << "style " << '"' << getEdgeStyleText(es) << '"' << '\n';
+}
+
+void GmlWriter::writeTargetArrow()
+{
+	fileOut_ << "targetArrow " << '"' << "standard" << '"' << '\n';
+}

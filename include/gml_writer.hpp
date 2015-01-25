@@ -56,20 +56,20 @@ public:
 		writeEnd();
 	}
 
+	void writeEdge(uint64_t id_src, uint64_t id_dest);
 
-	template<typename T>
-	void writeEdge(uint64_t id_src, uint64_t id_dest, T label)
+	void writeEdge(uint64_t id_src, uint64_t id_dest, const char *);
+
+	template<typename...Rest>
+	void writeEdge(uint64_t id_src, uint64_t id_dest, const char * label,  Rest&... rest)
 	{
 		writeEdgeBegin();
-		writeLabel<T>(label);
 		writeEdgeDirection(id_src, id_dest);
+		writeLabel(label);
+		writeGraphicsBegin();
+		writeTargetArrow();
+		writeEdgeAttribute(rest...);
 		writeEnd();
-	}
-
-	void writeEdge(uint64_t id_src, uint64_t id_dest)
-	{
-		writeEdgeBegin();
-		writeEdgeDirection(id_src, id_dest);
 		writeEnd();
 	}
 
@@ -87,6 +87,8 @@ private:
 	void writeId(uint64_t id);
 	void writeNodeAttribute(Shape & s);
 	void writeNodeAttribute(Geometry & c);
+	void writeEdgeAttribute(EdgeStyle &);
+	void writeTargetArrow();
 	void writeEnd();
 
 	void writeGraphicsBegin();
@@ -100,8 +102,11 @@ private:
 		writeNodeAttribute(first);
 		writeNodeAttribute(rest...);
 	}
+	template<typename First,typename...Rest>
+	void writeEdgeAttribute(const First& first, Rest&... rest)
 	{
-		fileOut_ << "label " << '"' << l << '"' << "\n";
+		writeEdgeAttribute(first);
+		writeEdgeAttribute(rest...);
 	}
 };
 
