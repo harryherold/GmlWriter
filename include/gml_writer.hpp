@@ -40,7 +40,8 @@ class GmlWriter
 {
 
 public:
-	GmlWriter(const char *, bool, bool, const std::string &);
+	GmlWriter(const char *, bool, bool, const std::string & label = "");
+	~GmlWriter();
 
 	void writeNode(uint64_t id, const char * label);
 
@@ -73,12 +74,8 @@ public:
 		writeEnd();
 	}
 
-	~GmlWriter();
-
 private:
 	std::ofstream fileOut_;
-	bool bHierarchic_;
-	bool bDirected_;
 
 	void writeNodeBegin();
 	void writeEdgeBegin();
@@ -90,7 +87,6 @@ private:
 	void writeEdgeAttribute(EdgeStyle &);
 	void writeTargetArrow();
 	void writeEnd();
-
 	void writeGraphicsBegin();
 
 	const char * getShapeText(Shape);

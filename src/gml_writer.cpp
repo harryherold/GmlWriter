@@ -10,7 +10,7 @@
 using namespace gw;
 
 GmlWriter::GmlWriter(const char * file, bool h, bool d, const std::string & label)
-:fileOut_{file},bHierarchic_{h},bDirected_{d}
+:fileOut_{ file }
 {
 	fileOut_ << "graph\n[\n";
 	fileOut_ << "hierarchic " << h << '\n';
