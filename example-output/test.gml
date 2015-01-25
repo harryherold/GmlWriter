@@ -17,6 +17,10 @@ node
 [
 id 3
 label "bar"
+graphics
+[
+type "ellipse"
+]
 ]
 node
 [
@@ -37,10 +41,22 @@ edge
 [
 source 2
 target 4
+label "1.2"
+graphics
+[
+targetArrow "standard"
+style "dotted"
+]
 ]
 edge
 [
 source 3
 target 4
+label "baz"
+graphics
+[
+targetArrow "standard"
+style "dotted"
+]
 ]
 ]
